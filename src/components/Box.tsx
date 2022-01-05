@@ -1,4 +1,4 @@
-import React, { VFC, CSSProperties } from 'react';
+import React, { VFC, CSSProperties, MouseEvent } from 'react';
 import styled from 'styled-components';
 
 const BoxStyles = styled.div`
@@ -18,15 +18,18 @@ const BoxStyles = styled.div`
 `;
 
 interface Props {
-  style: CSSProperties
+  style: CSSProperties;
+  handleMouseUp: (e: MouseEvent) => void;
+  handleMouseDown: (e: MouseEvent) => void;
 }
 
-const Box: VFC<Props> = ({ style }) => {
+const Box: VFC<Props> = ({ style, handleMouseUp, handleMouseDown }) => {
   return (
     <BoxStyles
     style={style}
+    onMouseUp={handleMouseUp}
+    onMouseDown={handleMouseDown}
     >
-      <h1>Drag!!</h1>
     </BoxStyles>
   );
 };

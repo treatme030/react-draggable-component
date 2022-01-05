@@ -10,7 +10,7 @@ const DraggableBlock = styled.div`
 `;
 
 const Draggable = () => {
-  const [dragging, setDragging] = useState(false);
+  const [mouseDown, setMouseDown] = useState(false);
   const [position, setPosition] = useState({
     initX: 0,
     initY: 0,
@@ -22,7 +22,11 @@ const Draggable = () => {
   const { initX, initY, moveX, moveY, x, y } = position;
 
   const handleMouseMove = useCallback((e) => {
-    if(dragging){
+    if(e.pageX <= 0 || e.pageY <= 0){
+      return;
+    }
+    if(mouseDown){
+      console.log(e)
       const newX = initX + (e.pageX - moveX);
       const newY = initY + (e.pageY - moveY);
 
@@ -32,10 +36,9 @@ const Draggable = () => {
         y: newY,
       })
     }
-  },[initX, initY, dragging, moveX, moveY, position]);
+  },[initX, initY, mouseDown, moveX, moveY, position]);
 
   const handleMouseDown = useCallback((e) => {
-    console.log(e)
     setPosition({
       ...position,
       initX: x,
@@ -43,11 +46,11 @@ const Draggable = () => {
       moveX: e.pageX,
       moveY: e.pageY,
     })
-    setDragging(true);
+    setMouseDown(true);
   },[position, x, y]);
 
-  const handleMouseUp = useCallback((e) => {
-    setDragging(false);
+  const handleMouseUp = useCallback(() => {
+    setMouseDown(false);
   },[]);
 
   useEffect(() => {
@@ -60,11 +63,10 @@ const Draggable = () => {
   },[handleMouseMove, handleMouseUp]);
 
   return (
-    <DraggableBlock
-    onMouseDown={handleMouseDown}
-    onMouseUp={handleMouseUp}
-    >
+    <DraggableBlock>
       <Box
+      handleMouseDown={handleMouseDown}
+      handleMouseUp={handleMouseUp}
       style={{ transform: `translate(${x}px, ${y}px)`}}
       />
     </DraggableBlock>
