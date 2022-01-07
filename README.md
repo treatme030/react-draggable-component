@@ -19,4 +19,4 @@
      > Box 컴포넌트의 크기를 min-width / min-height로 설정
    * 브라우저 호환성(Cross Browsing) 확인
    
-   ![box1](https://user-images.githubusercontent.com/74355328/148483975-2bfe93f4-a00f-47cb-95b8-a44de5ece401.gif)
+   ![box3](https://user-images.githubusercontent.com/74355328/148484261-d8373434-6a04-4464-a74c-85786d6a4092.gif)
