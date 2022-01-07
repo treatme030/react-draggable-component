@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Box from './Box';
 
@@ -19,22 +19,42 @@ const Draggable = () => {
     x: 0,
     y: 0,
   });
+  const boxRef = useRef<HTMLDivElement>(null!);
   const { initX, initY, moveX, moveY, x, y } = position;
 
   const handleMouseMove = useCallback((e) => {
-    if(e.pageX <= 0 || e.pageY <= 0){
-      return;
-    }
     if(mouseDown){
-      console.log(e)
       const newX = initX + (e.pageX - moveX);
       const newY = initY + (e.pageY - moveY);
+      const boxWidth = boxRef.current?.clientWidth
+      const boxSideLinePositionX = (window.innerWidth / 2) - (boxWidth / 2);
+      const boxSideLinePositionY = (window.innerHeight / 2) - (boxWidth / 2);
 
-      setPosition({
-        ...position,
-        x: newX,
-        y: newY,
-      })
+      if(newX < 0 && newY < 0){
+        setPosition({
+          ...position,
+          x: Math.max(- (boxSideLinePositionX), newX),
+          y: Math.max(- (boxSideLinePositionY), newY),
+        })
+      } else if(newX >= 0 && newY < 0){
+        setPosition({
+          ...position,
+          x: Math.min(boxSideLinePositionX, newX),
+          y: Math.max(- (boxSideLinePositionY), newY),
+        })
+      } else if(newX >= 0 && newY >= 0){
+        setPosition({
+          ...position,
+          x: Math.min(boxSideLinePositionX, newX),
+          y: Math.min(boxSideLinePositionY, newY),
+        })
+      } else if(newX < 0 && newY >= 0){
+        setPosition({
+          ...position,
+          x: Math.max(- (boxSideLinePositionX), newX),
+          y: Math.min(boxSideLinePositionY, newY),
+        })
+      }
     }
   },[initX, initY, mouseDown, moveX, moveY, position]);
 
@@ -65,6 +85,7 @@ const Draggable = () => {
   return (
     <DraggableBlock>
       <Box
+      ref={boxRef}
       handleMouseDown={handleMouseDown}
       handleMouseUp={handleMouseUp}
       style={{ transform: `translate(${x}px, ${y}px)`}}
