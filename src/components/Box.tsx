@@ -2,8 +2,8 @@ import React, { CSSProperties, forwardRef, MouseEvent, Ref } from 'react';
 import styled from 'styled-components';
 
 const BoxStyles = styled.div`
-  min-width: 200px;
-  min-height: 200px;
+  width: 200px;
+  height: 200px;
   background: #ecdb41;
   color: #3870b9;
   box-shadow: 2px 2px 5px rgba(94, 104, 121, 0.3);
