@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import Box from './Box';
+import Box from '../Box';
 
 const DraggableBlock = styled.div`
   height: 100vh;
@@ -83,7 +83,7 @@ const Draggable = () => {
   },[handleMouseMove, handleMouseUp]);
 
   return (
-    <DraggableBlock>
+    <DraggableBlock data-testid="drag-zone">
       <Box
       ref={boxRef}
       handleMouseDown={handleMouseDown}

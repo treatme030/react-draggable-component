@@ -1,5 +1,5 @@
 import React from 'react';
-import Draggable from './components/Draggable';
+import Draggable from './components/draggable/Draggable';
 
 function App() {
   return (

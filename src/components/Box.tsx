@@ -27,8 +27,8 @@ const Box = forwardRef(({ style, handleMouseUp, handleMouseDown }: Props, ref: R
     style={style}
     onMouseUp={handleMouseUp}
     onMouseDown={handleMouseDown}
-    >
-    </BoxStyles>
+    data-testid="draggable-box"
+    />
   );
 });
 
