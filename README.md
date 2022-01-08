@@ -18,5 +18,7 @@
      
 ### 🔸테스트
    * 브라우저 호환성(Cross Browsing) 확인
+     * chrom : 버전 95.04
+     * Firefox : 버전 95.01
    
    ![box3](https://user-images.githubusercontent.com/74355328/148484261-d8373434-6a04-4464-a74c-85786d6a4092.gif)
