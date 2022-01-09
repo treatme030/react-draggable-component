@@ -24,8 +24,8 @@ const Draggable = () => {
 
   const handleMouseMove = useCallback((e) => {
     if(mouseDown){
-      const newX = initX + (e.pageX - moveX);
-      const newY = initY + (e.pageY - moveY);
+      const newX = initX + (e.clientX - moveX);
+      const newY = initY + (e.clientY - moveY);
       const boxWidth = boxRef.current?.clientWidth
       const boxSideLinePositionX = (window.innerWidth / 2) - (boxWidth / 2);
       const boxSideLinePositionY = (window.innerHeight / 2) - (boxWidth / 2);
@@ -63,8 +63,8 @@ const Draggable = () => {
       ...position,
       initX: x,
       initY: y,
-      moveX: e.pageX,
-      moveY: e.pageY,
+      moveX: e.clientX,
+      moveY: e.clientY,
     })
     setMouseDown(true);
   },[position, x, y]);
